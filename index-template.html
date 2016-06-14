@@ -1,0 +1,54 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="_csrf" content="${_csrf.token}" />
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
+    <title>MoMo Login</title>
+
+    <style>
+        p#loadmask {
+            font-weight: 100;
+            font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+            position: absolute;
+            top: 35%;
+            left: 42%;
+        }
+    </style>
+</head>
+<body>
+<c:if test="${param.error ne null}">
+    <div id="loginerror" style="display:none"><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/></div>
+</c:if>
+
+    <div>
+        <p id="loadmask">
+            <img src="resources/images/loader.gif" />
+            Loading, please wait...
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        var Ext = Ext || {}; // Ext namespace won't be defined yet...
+
+        // This function is called by the Microloader after it has performed basic
+        // device detection. The results are provided in the "tags" object. You can
+        // use these tags here or even add custom tags. These can be used by platform
+        // filters in your manifest or by platformConfig expressions in your app.
+        //
+        Ext.beforeLoad = function (tags) {
+            // always load the classic profile
+            Ext.manifest = 'classic'; // this name must match a build profile name
+        };
+    </script>
+
+    <!-- The line below must be kept intact for Sencha Cmd to build your application -->
+    <script id="microloader" data-app="e2e0fec6-012e-4abe-a98d-22433ad2e3df" type="text/javascript" src="bootstrap.js"></script>
+</body>
+</html>

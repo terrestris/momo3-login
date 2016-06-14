@@ -1,0 +1,34 @@
+$wizard-primary-background-color: #fff;
+$wizard-button-background-color: #579ddb;
+
+$color-blue: #167abc;
+
+@include extjs-button-small-ui(
+    $ui: 'blue',
+    $background-color: $color-blue,
+    $border-color:darken($color-blue, 5%)
+);
+@include extjs-button-toolbar-small-ui(
+    $ui: 'blue',
+    $background-color: $color-blue,
+    $border-color:darken($color-blue, 5%)
+);
+
+.wizardprogressbar .x-btn-disabled.x-btn-default-toolbar-small {
+    opacity: 1 !important;
+}
+
+.wizardprogressbar {
+    .active {
+        .x-btn-icon-el, .x-btn-inner{
+            color: $color-blue;
+        }
+    }
+
+    background-color: $wizard-primary-background-color;
+    color: #fff;
+
+    .x-btn-icon-el, .x-btn-inner {
+        color: #cccccc;
+    }
+}
