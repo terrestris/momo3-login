@@ -19,11 +19,6 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
         var form = Ext.ComponentQuery.query('authdialog')[0];
         var loginUrl = BasiGX.util.Url.getWebProjectBaseUrl() + 'doLogin';
 
-        var urlParams = Ext.Object.fromQueryString(location.search.substring(1));
-        if(urlParams && urlParams.clientId) {
-            loginUrl = Ext.String.urlAppend(loginUrl, 'clientId=' + urlParams.clientId);
-        }
-
         form.getForm().doAction('standardsubmit', {
             clientValidation: true,
             standardSubmit: true,

@@ -87,7 +87,7 @@ Ext.define('MoMo.login.view.authentication.Login', {
             xtype: 'button',
             reference: 'loginButton',
             scale: 'large',
-            ui: 'momo',
+            ui: 'soft-blue',
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
             text: 'Login',
@@ -103,7 +103,7 @@ Ext.define('MoMo.login.view.authentication.Login', {
         }, {
             xtype: 'button',
             scale: 'large',
-            ui: 'momo',
+            ui: 'soft-blue',
             iconAlign: 'right',
             iconCls: 'x-fa fa-user-plus',
             text: 'Create Account',
