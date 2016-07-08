@@ -104,17 +104,19 @@ $color-gray: #949495;
     .x-form-trigger{
         text-align:right;
         width:50px;
+        background: none !important;
     }
     .password-trigger,
     .auth-email-trigger,
     .auth-password-trigger,
     .auth-envelope-trigger{
         &:before{
-            top: 10px;
+            top: 20px;
             left:-18px;
             position: relative;
             color: $dialog-trigger-color;
             font-size: 30px;
+            font-family: FontAwesome;
         }
 
         &.password-trigger:before,
