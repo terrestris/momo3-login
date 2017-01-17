@@ -4,6 +4,9 @@ bootstrap.json
 bootstrap.js
 bootstrap.css
 classic.json
+classic.jsonp
+sass/example/bootstrap.jsonp
+index.html
 modern.json
 sass/example/example.css
 sass/example/bootstrap.json
