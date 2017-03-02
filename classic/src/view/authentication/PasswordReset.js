@@ -39,11 +39,11 @@ Ext.define('MoMo.login.view.authentication.PasswordReset', {
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
-            height: 55,
             name: 'email',
             hideLabel: true,
+            margin: '5 0 15 0',
             allowBlank: false,
-            msgTarget: 'side',
+            msgTarget: 'under',
             emptyText: 'Email',
             vtype: 'email',
             triggers: {

@@ -38,7 +38,7 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
             pwdResetPanel = btn.up('passwordreset'),
             pwdResetForm = pwdResetPanel.down('form').getForm(),
             reqParams = {
-                email: pwdResetForm.findField('email').getValue()
+                email: pwdResetForm.findField('email').getValue().toLowerCase()
             };
 
         pwdResetPanel.setLoading(true);
@@ -161,6 +161,63 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
      */
     onPasswordFocus: function(passwordField) {
         passwordField.preventMark = false;
+    },
+
+    /**
+     *
+     */
+    onResendTokenClick: function(btn) {
+        var me = this,
+            resendTokenPanel = btn.up('resendtoken'),
+            resendTokenForm = resendTokenPanel.down('form').getForm(),
+            reqParams = {
+                email: resendTokenForm.findField('email')
+                        .getValue().toLowerCase()
+            };
+
+        resendTokenPanel.setLoading(true);
+
+        Ext.Ajax.request({
+            url: BasiGX.util.Url.getWebProjectBaseUrl() +
+                    'momousers/resendToken.action',
+            method: 'POST',
+            headers: BasiGX.util.CSRF.getHeader(),
+            params: reqParams,
+            callback: function() {
+                resendTokenPanel.setLoading(false);
+            },
+            success: function(response) {
+                var obj = Ext.decode(response.responseText);
+                if (obj.success) {
+                    Ext.Msg.show({
+                        title: 'Information',
+                        message: 'The registration mail has been sent to ' +
+                                'your account.',
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.Msg.INFO,
+                        fn: function() {
+                            me.redirectTo('login');
+                        }
+                    });
+                } else {
+                    Ext.Msg.alert('Error', 'Error sending the mail to ' +
+                        'your account. Has your account already be activated?');
+                }
+            },
+            failure: function() {
+                Ext.Msg.alert('Error', 'Error sending the mail to ' +
+                        'your account.');
+            }
+        });
+    },
+
+    /**
+     *
+     */
+    onUserNameChange: function(field, value) {
+        var hiddenSubmitField = field.up('form').down(
+                'textfield[name=username]');
+        hiddenSubmitField.setValue(value.toLowerCase());
     }
 
 });

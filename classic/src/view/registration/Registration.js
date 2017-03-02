@@ -91,24 +91,25 @@ Ext.define('MoMo.login.view.registration.Registration', {
                     down('textfield[name=password]').getValue();
                 return pw === val ? true : 'Passwords are not equal';
             }
-        }, {
-            xtype: 'checkbox',
-            name: 'termagree',
-            labelAlign: 'top',
-            inputValue: true,
-            submitValue: false,
-            fieldLabel: 'Review End User Agreement',
-            boxLabel: 'I agree with the Terms and Conditions *',
-            listeners: {
-                change: 'onTermCheckChange'
-            }
-        }, {
+        },
+//        {
+//            xtype: 'checkbox',
+//            name: 'termagree',
+//            labelAlign: 'top',
+//            inputValue: true,
+//            submitValue: false,
+//            fieldLabel: 'Review End User Agreement',
+//            boxLabel: 'I agree with the Terms and Conditions *',
+//            listeners: {
+//                change: 'onTermCheckChange'
+//            }
+//        },
+        {
             xtype: 'button',
             name: 'createAccountButton',
             reference: 'createAccount',
             scale: 'large',
-            ui: 'momo',
-            disabled: true,
+            formBind: true,
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
             text: 'Create Account',
