@@ -43,7 +43,7 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
             inputType: 'password',
             name: 'password',
             allowBlank: false,
-            msgTarget: 'side',
+            msgTarget: 'under',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-password-trigger'
@@ -57,7 +57,7 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
             allowBlank: false,
             submitValue: false,
             validateBlank: true,
-            msgTarget: 'side',
+            msgTarget: 'under',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-password-trigger'

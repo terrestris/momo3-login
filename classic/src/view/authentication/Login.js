@@ -41,15 +41,23 @@ Ext.define('MoMo.login.view.authentication.Login', {
             xtype: 'textfield',
             hideLabel: true,
             margin: '5 0 15 0',
-            name: 'username',
-            msgTarget: 'side',
+            name: 'no-submit-username',
+            msgTarget: 'under',
             emptyText: 'Username',
             allowBlank: false,
+            submitValue: false,
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-email-trigger'
                 }
+            },
+            listeners: {
+                change: 'onUserNameChange'
             }
+        }, {
+            xtype: 'textfield',
+            name: 'username',
+            hidden: true
         }, {
             xtype: 'textfield',
             hideLabel: true,
@@ -57,7 +65,7 @@ Ext.define('MoMo.login.view.authentication.Login', {
             emptyText: 'Password',
             inputType: 'password',
             name: 'password',
-            msgTarget: 'side',
+            msgTarget: 'under',
             reference: 'passwordField',
             allowBlank: false,
             triggers: {

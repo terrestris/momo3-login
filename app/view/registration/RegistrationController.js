@@ -9,16 +9,16 @@ Ext.define('MoMo.login.view.registration.RegistrationController', {
         'BasiGX.util.Url'
     ],
 
-    onTermCheckChange: function(box, newVal){
-        var form = box.up('form').getForm(),
-            button = box.up('form').down('button[name=createAccountButton]');
-
-        if (newVal && form.isValid()) {
-            button.enable();
-        } else {
-            button.disable();
-        }
-    },
+//    onTermCheckChange: function(box, newVal){
+//        var form = box.up('form').getForm(),
+//            button = box.up('form').down('button[name=createAccountButton]');
+//
+//        if (newVal && form.isValid()) {
+//            button.enable();
+//        } else {
+//            button.disable();
+//        }
+//    },
 
     /**
      *
@@ -27,6 +27,11 @@ Ext.define('MoMo.login.view.registration.RegistrationController', {
         var me = this,
             form = btn.up('form'),
             submitValues = form.getValues();
+
+        // Ensure the mail is lowercase always
+        if (submitValues && submitValues.email) {
+            submitValues.email = submitValues.email.toLowerCase();
+        }
 
         form.setLoading(true);
 
