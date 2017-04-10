@@ -37,7 +37,7 @@ Ext.define('MoMo.login.view.registration.RegistrationController', {
 
         Ext.Ajax.request({
             url: BasiGX.util.Url.getWebProjectBaseUrl() +
-                'user/register.action',
+                'momousers/register.action',
             method: 'POST',
             headers: BasiGX.util.CSRF.getHeader(),
             params: submitValues,
