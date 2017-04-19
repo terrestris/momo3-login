@@ -45,7 +45,7 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
 
         Ext.Ajax.request({
             url: BasiGX.util.Url.getWebProjectBaseUrl() +
-                'user/resetPassword.action',
+                'momousers/resetPassword.action',
             method: 'POST',
             headers: BasiGX.util.CSRF.getHeader(),
             params: reqParams,
@@ -95,7 +95,7 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
 
         Ext.Ajax.request({
             url: BasiGX.util.Url.getWebProjectBaseUrl() +
-                'user/changePassword.action',
+                'momousers/changePassword.action',
             method: 'POST',
             headers: BasiGX.util.CSRF.getHeader(),
             params: Ext.Object.merge(inputReqParamsObj, pwdObj),
