@@ -6,6 +6,7 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
 
     requires: [
         'MoMo.login.view.authentication.Dialog',
+        'MoMo.login.view.main.PasswordChangeModel',
         'Ext.container.Container',
         'Ext.form.Label',
         'Ext.form.field.Text',
@@ -13,12 +14,30 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
     ],
 
     controller: 'authentication',
+    viewModel: 'passwordchangemodel',
 
-    title: 'MoMo - Change Password',
+    bind: {
+        title: '{changePasswordTitle}'
+    },
+
 
     defaultFocus: 'authdialog', // Focus the Auth Form to force field focus
 
     items: [{
+        xtype: 'toolbar',
+        cls: 'language-toolbar',
+        height: 64,
+        itemId: 'headerBar',
+        items: [
+            {
+                xtype: 'momo-translation-de-button'
+            }, {
+                xtype: 'momo-translation-en-button'
+            }, {
+                xtype: 'momo-translation-mn-button'
+            }
+        ]
+    }, {
         xtype: 'authdialog',
         autoComplete: true,
         bodyPadding: '20 20',
@@ -35,11 +54,15 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
         items: [{
             xtype: 'label',
             cls: 'lock-screen-top-label',
-            text: 'Enter your new password.'
+            bind: {
+                text: '{newPasswordText}'
+            }
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
-            emptyText: 'Password',
+            bind: {
+                emptyText: '{passwordEmptyText}'
+            },
             inputType: 'password',
             name: 'password',
             allowBlank: false,
@@ -52,7 +75,9 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
-            emptyText: 'Confirm Password',
+            bind: {
+                emptyText: '{confirmPasswordEmptyText}'
+            },
             inputType: 'password',
             allowBlank: false,
             submitValue: false,
@@ -66,7 +91,9 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
             validator: function(val) {
                 var pw = this.up('form').
                     down('textfield[name=password]').getValue();
-                return pw === val ? true : 'Passwords are not equal';
+                var notEqualText = this.up('passwordchange').getViewModel()
+                    .get('passwordsAreNotEqualText');
+                return pw === val ? true : notEqualText;
             }
         }, {
             xtype: 'button',
@@ -76,16 +103,20 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
             formBind: true,
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
-            text: 'Change Password',
+            bind: {
+                text: '{changePasswordBtnText}'
+            },
             listeners: {
                 click: 'onChangeClick'
             }
         }, {
             xtype: 'component',
-            html: '<div style="text-align:right">' +
-                '<a href="#login" class="link-forgot-password">'+
-                    'Back to Log In</a>' +
-                '</div>'
+            bind: {
+                html: '<div style="text-align:right">' +
+                    '<a href="#login" class="link-forgot-password">'+
+                        '{backToLoginText}</a>' +
+                    '</div>'
+            }
         }]
     }]
 });

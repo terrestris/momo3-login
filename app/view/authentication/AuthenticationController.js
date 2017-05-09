@@ -35,6 +35,7 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
      */
     onResetClick: function(btn) {
         var me = this,
+            vm = me.getViewModel(),
             pwdResetPanel = btn.up('passwordreset'),
             pwdResetForm = pwdResetPanel.down('form').getForm(),
             reqParams = {
@@ -54,9 +55,8 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
                 var obj = Ext.decode(response.responseText);
                 if (obj.success) {
                     Ext.Msg.show({
-                        title:'Information',
-                        message: 'An email with further instructions ' +
-                            'has been sent to your account.',
+                        title: vm.get('registrationSuccessTitle'),
+                        message: vm.get('registrationSuccessMsg'),
                         buttons: Ext.Msg.OK,
                         icon: Ext.Msg.INFO,
                         fn: function() {
@@ -65,15 +65,17 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
                     });
                 } else {
                     pwdResetPanel.setLoading(false);
-                    Ext.Msg.alert('Error', 'Error sending the mail to ' +
-                            'your account : ' + obj.message);
+                    Ext.Msg.alert(vm.get('registrationFailureTitle'),
+                        vm.get('registrationFailureMsg') +
+                            ' : ' + obj.message);
                 }
             },
             failure: function(response) {
                 pwdResetPanel.setLoading(false);
                 var obj = Ext.decode(response.responseText);
-                Ext.Msg.alert('Error', 'Error sending the mail to ' +
-                        'your account : ' + obj.message);
+                Ext.Msg.alert(vm.get('registrationFailureTitle'),
+                    vm.get('registrationFailureMsg') +
+                    ' : ' + obj.message);
             }
         });
     },
@@ -83,6 +85,7 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
      */
     onChangeClick: function(btn) {
         var me = this,
+            vm = me.getViewModel(),
             pwdChangePanel = btn.up('passwordchange'),
             pwdChangeForm = pwdChangePanel.down('form').getForm(),
             inputReqParams = pwdChangePanel.reqParams,
@@ -104,8 +107,8 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
                 var obj = Ext.decode(response.responseText);
                 if (obj.success) {
                     Ext.Msg.show({
-                        title: 'Information',
-                        message: 'Your password has been successfully updated.',
+                        title: vm.get('passwordUpdateSuccessTitle'),
+                        message: vm.get('passwordUpdateSuccessMsg'),
                         buttons: Ext.Msg.OK,
                         icon: Ext.Msg.INFO,
                         fn: function() {
@@ -114,14 +117,16 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
                     });
                 } else {
                     pwdChangePanel.setLoading(false);
-                    Ext.Msg.alert('Error', 'Error updating the password: ' +
+                    Ext.Msg.alert(vm.get('passwordUpdateFailureTitle'),
+                        vm.get('passwordUpdateFailureMsg') + ' : ' +
                         obj.message);
                 }
             },
             failure: function(response) {
                 pwdChangePanel.setLoading(false);
                 var obj = Ext.decode(response.responseText);
-                Ext.Msg.alert('Error', 'Error updating the password: ' +
+                Ext.Msg.alert(vm.get('passwordUpdateFailureTitle'),
+                    vm.get('passwordUpdateFailureMsg') + ' : ' +
                     obj.message);
             }
         });
@@ -168,6 +173,7 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
      */
     onResendTokenClick: function(btn) {
         var me = this,
+            vm = me.getViewModel(),
             resendTokenPanel = btn.up('resendtoken'),
             resendTokenForm = resendTokenPanel.down('form').getForm(),
             reqParams = {
@@ -190,9 +196,8 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
                 var obj = Ext.decode(response.responseText);
                 if (obj.success) {
                     Ext.Msg.show({
-                        title: 'Information',
-                        message: 'The registration mail has been sent to ' +
-                                'your account.',
+                        title: vm.get('resendRegistrationSuccessTitle'),
+                        message: vm.get('resendRegistrationSuccessMsg'),
                         buttons: Ext.Msg.OK,
                         icon: Ext.Msg.INFO,
                         fn: function() {
@@ -200,13 +205,13 @@ Ext.define('MoMo.login.view.authentication.AuthenticationController', {
                         }
                     });
                 } else {
-                    Ext.Msg.alert('Error', 'Error sending the mail to ' +
-                        'your account. Has your account already be activated?');
+                    Ext.Msg.alert(vm.get('resendRegistrationFailureTitle'),
+                        vm.get('resendRegistrationFailureMsg'));
                 }
             },
             failure: function() {
-                Ext.Msg.alert('Error', 'Error sending the mail to ' +
-                        'your account.');
+                Ext.Msg.alert(vm.get('resendRegistrationFailureTitle'),
+                    vm.get('resendRegistrationFailureMsg'));
             }
         });
     },

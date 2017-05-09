@@ -6,6 +6,7 @@ Ext.define('MoMo.login.view.authentication.PasswordReset', {
 
     requires: [
         'MoMo.login.view.authentication.Dialog',
+        'MoMo.login.view.main.PasswordResetModel',
         'Ext.container.Container',
         'Ext.form.Label',
         'Ext.form.field.Text',
@@ -13,12 +14,29 @@ Ext.define('MoMo.login.view.authentication.PasswordReset', {
     ],
 
     controller: 'authentication',
+    viewModel: 'passwordresetmodel',
 
-    title: 'MoMo - Reset Password',
+    bind: {
+        title: '{passwordResetTitle}'
+    },
 
     defaultFocus: 'authdialog', // Focus the Auth Form to force field focus
 
     items: [{
+        xtype: 'toolbar',
+        cls: 'language-toolbar',
+        height: 64,
+        itemId: 'headerBar',
+        items: [
+            {
+                xtype: 'momo-translation-de-button'
+            }, {
+                xtype: 'momo-translation-en-button'
+            }, {
+                xtype: 'momo-translation-mn-button'
+            }
+        ]
+    }, {
         xtype: 'authdialog',
         autoComplete: true,
         bodyPadding: '20 20',
@@ -35,7 +53,9 @@ Ext.define('MoMo.login.view.authentication.PasswordReset', {
         items: [{
             xtype: 'label',
             cls: 'lock-screen-top-label',
-            text: 'Enter your email address for further reset instructions'
+            bind: {
+                text: '{passwordResetDescription}'
+            }
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
@@ -44,7 +64,9 @@ Ext.define('MoMo.login.view.authentication.PasswordReset', {
             margin: '5 0 15 0',
             allowBlank: false,
             msgTarget: 'under',
-            emptyText: 'Email',
+            bind: {
+                emptyText: '{emailAddressEmptyText}'
+            },
             vtype: 'email',
             triggers: {
                 glyphed: {
@@ -59,16 +81,21 @@ Ext.define('MoMo.login.view.authentication.PasswordReset', {
             formBind: true,
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
-            text: 'Reset Password',
+            bind: {
+                text: '{resetPasswordBtnText}'
+            },
             listeners: {
                 click: 'onResetClick'
             }
         }, {
             xtype: 'component',
-            html: '<div style="text-align:right">' +
-                '<a href="#login" class="link-forgot-password">'+
-                    'Back to Log In</a>' +
-                '</div>'
+            name: 'backToLoginBox',
+            bind: {
+                html: '<div style="text-align:right">' +
+                    '<a href="#login" class="link-forgot-password">' +
+                        '{backToLoginText}</a>' +
+                    '</div>'
+            }
         }]
     }]
 });

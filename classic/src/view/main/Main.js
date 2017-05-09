@@ -7,13 +7,14 @@ Ext.define('MoMo.login.view.main.Main', {
     extend: 'Ext.container.Viewport',
     xtype: 'app-main',
     controller: 'maincontroller',
+    viewModel: 'mainmodel',
 
     requires: [
         'Ext.window.MessageBox',
 
         'MoMo.login.view.main.MainController',
+        'MoMo.login.view.main.MainModel',
         'MoMo.login.view.authentication.Login',
-
         'BasiGX.util.CSRF'
     ],
 
