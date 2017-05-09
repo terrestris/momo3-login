@@ -9,6 +9,7 @@ Ext.define('MoMo.login.view.authentication.ResendToken', {
 
     requires: [
         'MoMo.login.view.authentication.Dialog',
+        'MoMo.login.view.main.ResendTokenModel',
         'Ext.container.Container',
         'Ext.form.Label',
         'Ext.form.field.Text',
@@ -16,12 +17,29 @@ Ext.define('MoMo.login.view.authentication.ResendToken', {
     ],
 
     controller: 'authentication',
+    viewModel: 'resendtokenmodel',
 
-    title: 'MoMo - Resend registration mail',
+    bind: {
+        title: '{resendTokenTitle}'
+    },
 
     defaultFocus: 'authdialog', // Focus the Auth Form to force field focus
 
     items: [{
+        xtype: 'toolbar',
+        cls: 'language-toolbar',
+        height: 64,
+        itemId: 'headerBar',
+        items: [
+            {
+                xtype: 'momo-translation-de-button'
+            }, {
+                xtype: 'momo-translation-en-button'
+            }, {
+                xtype: 'momo-translation-mn-button'
+            }
+        ]
+    }, {
         xtype: 'authdialog',
         autoComplete: true,
         bodyPadding: '20 20',
@@ -38,34 +56,18 @@ Ext.define('MoMo.login.view.authentication.ResendToken', {
         items: [{
             xtype: 'label',
             cls: 'lock-screen-top-label',
-            html: '<p>The account you tried to log in with is not activated. ' +
-                    '</p>' +
-                    '<p>You can activate your account by opening the ' +
-                    'registration URL you should have received via email. ' +
-                    'If you haven\'t received the registration mail, please ' +
-                    'try the following:</p>' +
-                    '<ul>' +
-                    '<li>Ensure the email address you used to sign up with ' +
-                    'is correct.</li>' +
-                    '<li>Check your spam folder to see if the email has been ' +
-                    'delivered there.</li>' +
-                    '<li>If you\'re using a mail program (like Thunderbird ' +
-                    'or Outlook) to fetch your mails, you might need to ' +
-                    'login to the mail service web client to see the spam ' +
-                    'folder.</li>' +
-                    '<li>Please be patient, sometimes it can took a while ' +
-                    '(up to 24h) to the mail to be delivered.</li>' +
-                    '</ul>' +
-                    '<p>If the above couldn\'t help, please enter the email ' +
-                    'address you used to sign up with and the registration ' +
-                    'will be sent to you again:</p>'
+            bind: {
+                html: '{resendTokenHtmlText}'
+            }
         }, {
             xtype: 'textfield',
             hideLabel: true,
             margin: '5 0 15 0',
             name: 'email',
             msgTarget: 'under',
-            emptyText: 'Email',
+            bind: {
+                emptyText: '{resendTokenEmailEmptyText}'
+            },
             cls: 'auth-textbox',
             allowBlank: false,
             vtype: 'email',
@@ -81,16 +83,20 @@ Ext.define('MoMo.login.view.authentication.ResendToken', {
             formBind: true,
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
-            text: 'Resend registration mail',
+            bind: {
+                text: '{resendTokenBtnText}'
+            },
             listeners: {
                 click: 'onResendTokenClick'
             }
         }, {
             xtype: 'component',
-            html: '<div style="text-align:right">' +
-                '<a href="#login" class="link-forgot-password">'+
-                    'Back to Log In</a>' +
-                '</div>'
+            bind: {
+                html: '<div style="text-align:right">' +
+                    '<a href="#login" class="link-forgot-password">'+
+                        '{backToLoginText}</a>' +
+                    '</div>'
+            }
         }]
     }]
 });

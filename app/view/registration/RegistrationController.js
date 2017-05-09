@@ -25,19 +25,23 @@ Ext.define('MoMo.login.view.registration.RegistrationController', {
      */
     onCreateClick: function(btn) {
         var me = this,
+            vm = me.getViewModel(),
             form = btn.up('form'),
-            submitValues = form.getValues();
+            submitValues = form.getValues(),
+            language = Ext.ComponentQuery.query('app-main')[0].getViewModel()
+                .get('currentLanguage');
 
         // Ensure the mail is lowercase always
         if (submitValues && submitValues.email) {
             submitValues.email = submitValues.email.toLowerCase();
         }
+        submitValues.languageCode = language;
 
         form.setLoading(true);
 
         Ext.Ajax.request({
             url: BasiGX.util.Url.getWebProjectBaseUrl() +
-                'momousers/register.action',
+                'momousers/registeruser.action',
             method: 'POST',
             headers: BasiGX.util.CSRF.getHeader(),
             params: submitValues,
@@ -46,10 +50,8 @@ Ext.define('MoMo.login.view.registration.RegistrationController', {
                 var respObj = Ext.decode(response.responseText);
                 if (respObj.success) {
                     Ext.Msg.show({
-                        title:'Information',
-                        message: 'Your account has been successfully ' +
-                                'created. An Email with further instructions ' +
-                                'has been sent to your given account.',
+                        title: vm.get('accountCreationSuccessTitle'),
+                        message: vm.get('accountCreationSuccessMsg'),
                         buttons: Ext.Msg.OK,
                         icon: Ext.Msg.INFO,
                         fn: function() {
@@ -57,16 +59,18 @@ Ext.define('MoMo.login.view.registration.RegistrationController', {
                         }
                     });
                 } else {
-                    Ext.Msg.alert('Error', 'Error creating the new account: ' +
-                            respObj.message);
+                    Ext.Msg.alert(vm.get('accountCreationFailureTitle'),
+                        vm.get('accountCreationFailureMsg') + ' : ' +
+                        respObj.message);
                 }
 
             },
             failure: function(response) {
                 form.setLoading(false);
                 var respObj = Ext.decode(response.responseText);
-                Ext.Msg.alert('Error', 'Error creating the new account: ' +
-                        respObj.message);
+                Ext.Msg.alert(vm.get('accountCreationFailureTitle'),
+                    vm.get('accountCreationFailureMsg') + ' : ' +
+                    respObj.message);
             }
         });
     }

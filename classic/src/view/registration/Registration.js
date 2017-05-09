@@ -12,16 +12,34 @@ Ext.define('MoMo.login.view.registration.Registration', {
         'Ext.button.Button',
 
         'MoMo.login.view.registration.RegistrationController',
+        'MoMo.login.view.registration.RegistrationModel',
         'MoMo.login.view.authentication.Dialog'
     ],
 
-    title: 'MoMo - Create Account',
+    bind: {
+        title: '{registrationTitle}'
+    },
 
     controller: 'registration',
+    viewModel: 'registrationmodel',
 
     defaultFocus: 'authdialog', // Focus the Auth Form to force field focus
 
     items: [{
+        xtype: 'toolbar',
+        cls: 'language-toolbar',
+        height: 64,
+        itemId: 'headerBar',
+        items: [
+            {
+                xtype: 'momo-translation-de-button'
+            }, {
+                xtype: 'momo-translation-en-button'
+            }, {
+                xtype: 'momo-translation-mn-button'
+            }
+        ]
+    }, {
         xtype: 'authdialog', //form
         autoComplete: true,
         bodyPadding: '20 20',
@@ -39,11 +57,15 @@ Ext.define('MoMo.login.view.registration.Registration', {
         items: [{
             xtype: 'label',
             cls: 'lock-screen-top-label',
-            text: 'Enter e-mail and password to register.'
+            bind: {
+                text: '{registrationDescriptionText}'
+            }
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
-            emptyText: 'Email',
+            bind: {
+                emptyText: '{registrationEmailEmptyText}'
+            },
             vtype: 'email',
             name: 'email',
             msgTarget: 'side',
@@ -58,7 +80,9 @@ Ext.define('MoMo.login.view.registration.Registration', {
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
-            emptyText: 'Password',
+            bind: {
+                emptyText: '{registrationPasswordEmptyText}'
+            },
             inputType: 'password',
             name: 'password',
             allowBlank: false,
@@ -73,7 +97,9 @@ Ext.define('MoMo.login.view.registration.Registration', {
         }, {
             xtype: 'textfield',
             cls: 'auth-textbox',
-            emptyText: 'Confirm Password',
+            bind: {
+                emptyText: '{registrationConfirmPasswordEmptyText}'
+            },
             inputType: 'password',
             allowBlank: false,
             submitValue: false,
@@ -89,7 +115,9 @@ Ext.define('MoMo.login.view.registration.Registration', {
             validator: function(val) {
                 var pw = this.up('form').
                     down('textfield[name=password]').getValue();
-                return pw === val ? true : 'Passwords are not equal';
+                var notEqualText = this.up('registration').getViewModel()
+                    .get('passwordsAreNotEqualText');
+                return pw === val ? true : notEqualText;
             }
         },
 //        {
@@ -112,16 +140,20 @@ Ext.define('MoMo.login.view.registration.Registration', {
             formBind: true,
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
-            text: 'Create Account',
+            bind: {
+                text: '{registrationBtnText}'
+            },
             listeners: {
                 click: 'onCreateClick'
             }
         }, {
             xtype: 'component',
-            html: '<div style="text-align:right">' +
-                '<a href="#login" class="link-forgot-password">'+
-                    'Back to Log In</a>' +
-                '</div>'
+            bind: {
+                html: '<div style="text-align:right">' +
+                    '<a href="#login" class="link-forgot-password">' +
+                        '{backToLoginText}</a>' +
+                    '</div>'
+            }
         }]
     }]
 });

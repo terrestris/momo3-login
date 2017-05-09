@@ -11,6 +11,7 @@ modern.json
 sass/example/example.css
 sass/example/bootstrap.json
 sass/example/bootstrap.js
+.node_modules
 build
 ext
 packages/remote

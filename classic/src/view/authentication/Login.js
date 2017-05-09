@@ -4,11 +4,16 @@
 Ext.define('MoMo.login.view.authentication.Login', {
     extend: 'MoMo.login.view.authentication.LockingWindow',
     xtype: 'login',
+    viewModel: 'loginmodel',
 
     routeId: 'login',
 
     requires: [
         'MoMo.login.view.authentication.Dialog',
+        'MoMo.login.view.button.translation.ToMongolian',
+        'MoMo.login.view.button.translation.ToGerman',
+        'MoMo.login.view.button.translation.ToEnglish',
+        'MoMo.login.view.authentication.Login',
         'Ext.form.field.Text',
         'Ext.form.Label',
         'Ext.button.Button',
@@ -16,11 +21,27 @@ Ext.define('MoMo.login.view.authentication.Login', {
         'BasiGX.util.CSRF'
     ],
 
-    title: 'MoMo - Login',
+    bind: {
+        title: '{loginTitle}'
+    },
 
     defaultFocus: 'authdialog', // Focus the Auth Form to force field focus
 
     items: [{
+        xtype: 'toolbar',
+        cls: 'language-toolbar',
+        height: 64,
+        itemId: 'headerBar',
+        items: [
+            {
+                xtype: 'momo-translation-de-button'
+            }, {
+                xtype: 'momo-translation-en-button'
+            }, {
+                xtype: 'momo-translation-mn-button'
+            }
+        ]
+    }, {
         xtype: 'authdialog',
         autoComplete: true,
         bodyPadding: '20 20',
@@ -36,14 +57,18 @@ Ext.define('MoMo.login.view.authentication.Login', {
         },
         items: [{
             xtype: 'label',
-            text: 'Sign into your account'
+            bind: {
+                text: '{loginFormLabel}'
+            }
         }, {
             xtype: 'textfield',
             hideLabel: true,
             margin: '5 0 15 0',
             name: 'no-submit-username',
             msgTarget: 'under',
-            emptyText: 'Username',
+            bind: {
+                emptyText: '{userNameEmptyText}'
+            },
             allowBlank: false,
             submitValue: false,
             triggers: {
@@ -62,7 +87,9 @@ Ext.define('MoMo.login.view.authentication.Login', {
             xtype: 'textfield',
             hideLabel: true,
             margin: '5 0 10 0',
-            emptyText: 'Password',
+            bind: {
+                emptyText: '{passwordEmptyText}'
+            },
             inputType: 'password',
             name: 'password',
             msgTarget: 'under',
@@ -88,8 +115,11 @@ Ext.define('MoMo.login.view.authentication.Login', {
             layout: 'hbox',
             items: [{
                 xtype: 'box',
-                html: '<a href="#passwordreset" class="link-' +
-                    'forgot-password"> Forgot Password ?</a>'
+                name: 'forgotPasswordBox',
+                bind: {
+                    html: '<a href="#passwordreset" class="link-' +
+                        'forgot-password">{forgotPasswordText}</a>'
+                }
             }]
         }, {
             xtype: 'button',
@@ -98,15 +128,16 @@ Ext.define('MoMo.login.view.authentication.Login', {
             ui: 'soft-blue',
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
-            text: 'Login',
+            bind: {
+                text: '{loginBtnText}'
+            },
             formBind: true,
             listeners: {
                 click: 'onLoginButton'
             }
         }, {
             xtype: 'box',
-            html: '<div class="outer-div"><div class="seperator">' +
-                'OR</div></div>',
+            html: '<div class="outer-div"><div class="seperator"></div></div>',
             margin: '10 0'
         }, {
             xtype: 'button',
@@ -114,7 +145,9 @@ Ext.define('MoMo.login.view.authentication.Login', {
             ui: 'soft-blue',
             iconAlign: 'right',
             iconCls: 'x-fa fa-user-plus',
-            text: 'Create Account',
+            bind: {
+                text: '{createAccountBtnText}'
+            },
             listeners: {
                 click: 'onNewAccount'
             }

@@ -10,10 +10,12 @@ Ext.define('MoMo.login.view.authentication.Dialog', {
 
     requires: [
         'MoMo.login.view.authentication.AuthenticationController',
+        'MoMo.login.view.authentication.AuthenticationModel',
         'Ext.form.Panel'
     ],
 
     controller: 'authentication',
+    viewModel: 'authentication',
 
     listeners: {
         afterrender: {
