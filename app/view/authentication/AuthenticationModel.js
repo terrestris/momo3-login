@@ -17,6 +17,8 @@ Ext.define('MoMo.login.view.authentication.AuthenticationModel', {
             'to your account',
         resendRegistrationFailureTitle: 'Error',
         resendRegistrationFailureMsg: 'Error sending the mail to ' +
-            'your account. Has your account already be activated?'
+            'your account. Has your account already be activated?',
+        helpButtonText: 'Helpdocument',
+        contextHelpTooltip: 'Contextsensitive help'
     }
 });

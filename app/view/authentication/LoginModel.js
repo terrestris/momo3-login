@@ -9,6 +9,8 @@ Ext.define('MoMo.login.view.main.LoginModel', {
         passwordEmptyText: 'Password',
         forgotPasswordText: 'Forgot Password ?',
         loginBtnText: 'Login',
-        createAccountBtnText: 'Create Account'
+        createAccountBtnText: 'Create Account',
+        helpButtonText: 'Helpdocument',
+        contextHelpTooltip: 'Contextsensitive help'
     }
 });

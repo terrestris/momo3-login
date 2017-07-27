@@ -39,6 +39,57 @@ Ext.define('MoMo.login.view.authentication.Login', {
                 xtype: 'momo-translation-en-button'
             }, {
                 xtype: 'momo-translation-mn-button'
+            }, {
+                xtype: 'button',
+                cls: 'helpbtn',
+                bind: {
+                    text: '{helpButtonText}'
+                },
+                handler: function() {
+                    var lang = Ext.ComponentQuery.query(
+                        'app-main')[0].getViewModel().get(
+                        'currentLanguage').toLowerCase();
+                    var win = Ext.create('Ext.window.Window', {
+                        width: '80%',
+                        height: '80%',
+                        layout: 'fit',
+                        items: {
+                            xtype: 'component',
+                            autoEl: {
+                                tag: 'iframe',
+                                style: 'height: 100%; width: 100%; border: ' +
+                                    'none',
+                                src: '../userdocs/build/MoMo_doc_' + lang +
+                                    '.pdf'
+                            }
+                        }
+                    });
+                    win.show();
+                }
+            }, {
+                xtype: 'basigx-button-help',
+                viewModel: {
+                    data: {
+                        tooltip: '{contextHelpTooltip}'
+                    }
+                },
+                listeners: {
+                    click: function(btn) {
+                        var lang = Ext.ComponentQuery.query(
+                            'app-main')[0].getViewModel().get(
+                            'currentLanguage').toLowerCase();
+                        var path = '../userdocs/build/MoMo_doc_' + lang +
+                            '_html.html';
+                        btn.setHelpUrl(path);
+                    }
+                },
+                helpUrl: '../userdocs/build/MoMo_doc_en_html.html',
+                additonalHelpKeys: [
+                    'momo-translation-en-button',
+                    'momo-translation-de-button',
+                    'momo-translation-mn-button'
+                    //TODO: add more
+                ]
             }
         ]
     }, {

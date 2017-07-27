@@ -8,6 +8,8 @@ Ext.define('MoMo.login.view.main.PasswordResetModel', {
             'reset instructions',
         emailAddressEmptyText: 'Email',
         resetPasswordBtnText: 'Reset Password',
-        backToLoginText: 'Back to Log In'
+        backToLoginText: 'Back to Log In',
+        helpButtonText: 'Helpdocument',
+        contextHelpTooltip: 'Contextsensitive help'
     }
 });

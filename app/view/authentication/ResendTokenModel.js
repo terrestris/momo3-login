@@ -27,6 +27,8 @@ Ext.define('MoMo.login.view.main.ResendTokenModel', {
             'will be sent to you again:</p>',
         resendTokenEmailEmptyText: 'Email',
         resendTokenBtnText: 'Resend registration mail',
-        backToLoginText: 'Back to Login'
+        backToLoginText: 'Back to Login',
+        helpButtonText: 'Helpdocument',
+        contextHelpTooltip: 'Contextsensitive help'
     }
 });
