@@ -9,6 +9,8 @@ Ext.define('MoMo.login.view.main.PasswordChangeModel', {
         confirmPasswordEmptyText: 'Confirm Password',
         changePasswordBtnText: 'Change Password',
         backToLoginText: 'Back to Login',
-        passwordsAreNotEqualText: 'Passwords do not match'
+        passwordsAreNotEqualText: 'Passwords do not match',
+        helpButtonText: 'Helpdocument',
+        contextHelpTooltip: 'Contextsensitive help'
     }
 });

@@ -124,6 +124,10 @@ Ext.define('MoMo.login.view.button.TranslationController', {
                         );
                     }
                     me.firstApplicationLoad = false;
+
+                    var mainVm = Ext.ComponentQuery.query(
+                        'app-main')[0].getViewModel();
+                    mainVm.set('currentLanguage', me.locale);
                 }
             }
         }

@@ -16,6 +16,8 @@ Ext.define('MoMo.login.view.registration.RegistrationModel', {
             'created. An Email with further instructions ' +
             'has been sent to your given account',
         accountCreationFailureTitle: 'Error',
-        accountCreationFailureMsg: 'Error creating the new account'
+        accountCreationFailureMsg: 'Error creating the new account',
+        helpButtonText: 'Helpdocument',
+        contextHelpTooltip: 'Contextsensitive help'
     }
 });
