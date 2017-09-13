@@ -92,6 +92,7 @@ Ext.define('MoMo.login.view.registration.Registration', {
         ]
     }, {
         xtype: 'authdialog', //form
+        name: 'registration',
         autoComplete: true,
         bodyPadding: '20 20',
         cls: 'auth-dialog-login',
@@ -102,7 +103,10 @@ Ext.define('MoMo.login.view.registration.Registration', {
             align: 'stretch'
         },
         defaults: {
-            margin: '5 0'
+            margin: '5 0',
+            msgTarget: 'under',
+            allowBlank: false,
+            hideLabel: true
         },
         defaultButton: 'createAccount',
         items: [{
@@ -119,10 +123,7 @@ Ext.define('MoMo.login.view.registration.Registration', {
             },
             vtype: 'email',
             name: 'email',
-            msgTarget: 'side',
-            hideLabel: true,
             margin: '5 0 15 0',
-            allowBlank: false,
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-email-trigger'
@@ -136,9 +137,9 @@ Ext.define('MoMo.login.view.registration.Registration', {
             },
             inputType: 'password',
             name: 'password',
-            allowBlank: false,
-            msgTarget: 'side',
-            hideLabel: true,
+            minLength: 6,
+            regex: /^\S*$/,
+            regexText: 'No whitespace allowed',
             margin: '5 0 15 0',
             triggers: {
                 glyphed: {
@@ -152,11 +153,8 @@ Ext.define('MoMo.login.view.registration.Registration', {
                 emptyText: '{registrationConfirmPasswordEmptyText}'
             },
             inputType: 'password',
-            allowBlank: false,
             submitValue: false,
             validateBlank: true,
-            msgTarget: 'side',
-            hideLabel: true,
             margin: '5 0 5 0',
             triggers: {
                 glyphed: {
