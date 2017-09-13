@@ -128,6 +128,75 @@ Ext.define('MoMo.login.view.button.TranslationController', {
                     var mainVm = Ext.ComponentQuery.query(
                         'app-main')[0].getViewModel();
                     mainVm.set('currentLanguage', me.locale);
+
+
+                    // special handling of validation text translation
+                    var registrationLockingWindow =
+                        Ext.ComponentQuery.query('registration')[0];
+
+                    if(registrationLockingWindow) {
+                        var registrationWindowVm =
+                        registrationLockingWindow.getViewModel();
+
+                        var registrationAuthDialog =
+                            registrationLockingWindow.down(
+                                'authdialog[name=registration]'
+                            );
+
+                        var pwTextfield =
+                            registrationAuthDialog.down(
+                                'textfield[name=password]'
+                            );
+
+                        pwTextfield.regexText =
+                            registrationWindowVm.get(
+                                'pwTextfieldNoWhitespaceText'
+                            );
+
+                        // validate all dirty textfields to
+                        // force an update of the texts
+                        Ext.each(registrationAuthDialog.query('textfield'),
+                            function(tf) {
+                                if(tf.isDirty()) {
+                                    tf.validate();
+                                }
+                            }
+                        );
+                    }
+
+
+                    var changePwWin =
+                        Ext.ComponentQuery.query('passwordchange')[0];
+
+                    if(changePwWin) {
+                        var changePwWinVm =
+                            changePwWin.getViewModel();
+
+                        var changePwAuthDialog =
+                            changePwWin.down(
+                                'authdialog[name=changepassword]'
+                            );
+
+                        var pwTextfieldChangePw =
+                            changePwAuthDialog.down(
+                                'textfield[name=password]'
+                            );
+
+                        pwTextfieldChangePw.regexText =
+                            changePwWinVm.get(
+                                'pwTextfieldNoWhitespaceText'
+                            );
+
+                        // validate all dirty textfields to
+                        // force an update of the texts
+                        Ext.each(changePwAuthDialog.query('textfield'),
+                            function(tf) {
+                                if(tf.isDirty()) {
+                                    tf.validate();
+                                }
+                            }
+                        );
+                    }
                 }
             }
         }

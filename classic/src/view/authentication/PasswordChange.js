@@ -90,6 +90,7 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
         ]
     }, {
         xtype: 'authdialog',
+        name: 'changepassword',
         autoComplete: true,
         bodyPadding: '20 20',
         cls: 'auth-dialog-login',
@@ -99,7 +100,9 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
             align: 'stretch'
         },
         defaults: {
-            margin: '5 0'
+            margin: '5 0',
+            msgTarget: 'under',
+            allowBlank: false
         },
         defaultButton: 'changePassword',
         items: [{
@@ -116,8 +119,9 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
             },
             inputType: 'password',
             name: 'password',
-            allowBlank: false,
-            msgTarget: 'under',
+            minLength: 6,
+            regex: /^\S*$/,
+            regexText: 'No whitespace allowed',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-password-trigger'
@@ -130,10 +134,8 @@ Ext.define('MoMo.login.view.authentication.PasswordChange', {
                 emptyText: '{confirmPasswordEmptyText}'
             },
             inputType: 'password',
-            allowBlank: false,
             submitValue: false,
             validateBlank: true,
-            msgTarget: 'under',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-password-trigger'
