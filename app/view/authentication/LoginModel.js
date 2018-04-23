@@ -5,7 +5,7 @@ Ext.define('MoMo.login.view.main.LoginModel', {
     data: {
         loginTitle: 'MoMo - Login',
         loginFormLabel: 'Sign into your account',
-        userNameEmptyText: 'Username',
+        userNameEmptyText: 'Email',
         passwordEmptyText: 'Password',
         forgotPasswordText: 'Forgot Password ?',
         loginBtnText: 'Login',
